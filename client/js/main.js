@@ -1,5 +1,5 @@
 require.config({
-    "baseUrl": "client/js",
+    "baseUrl": "js",
     "paths": {
 	underscore: "vendor/underscore.min",
 	backbone: "vendor/backbone/backbone",
