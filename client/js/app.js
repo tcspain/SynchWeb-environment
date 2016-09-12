@@ -1,33 +1,32 @@
-app.module("Main", function (Main) {
-    Main.views = {};
+define(["backbone", "marionette", "underscore", "jquery",
 
-    app.addInitializer(function() {
-	Main.show();
-    });
+	"modules/default/views/header",
+	"modules/default/views/body",
+	"modules/default/views/footer",
+       ],
+       function(Backbone, Marionette, _, $, HeaderView, BodyView, FooterView) {
 
-    this.show = function() {
-	this.headerView = new this.views.HeaderView();
-	this.footerView = new this.views.FooterView();
-	this.bodyView = new this.views.BodyView();
+	   window.app = new Marionette.Application();
 
-	app.header.show(this.headerView);
-	app.body.show(this.bodyView);
-	app.footer.show(this.footerView);
-    };
+	   app.addRegions( {
+	       header: "#header-region",
+	       body1: "#body1-region",
+	       footer: "#footer-region"
+	   });
 
-    // views
+	   app.addInitializer(function(){
+	       require([], function() {
+		   this.headerView = new HeaderView();
+		   app.header.show(this.headerView);
 
-    Main.views.BodyView = Marionette.ItemView.extend({
-	template: "#body"
-    });
+		   this.bodyView = new BodyView();
+		   app.body1.show(this.bodyView);
 
-    Main.views.FooterView = Marionette.ItemView.extend({
-	template: "#footer"
-    });
+		   this.footerView = new FooterView();
+		   app.footer.show(this.footerView);
+	       });
+	   });
 
-    Main.views.HeaderView = Marionette.ItemView.extend({
-	template: "#header"
-    });
+	   return app
+       });
 
-});
-    

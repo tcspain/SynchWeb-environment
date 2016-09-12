@@ -1,40 +1,28 @@
 require.config({
-    "baseUrl": "js",
-    "paths": {
+    paths: {
 	underscore: "vendor/underscore.min",
 	backbone: "vendor/backbone/backbone",
 	marionette: "vendor/backbone/backbone.marionette",
 	jquery: "vendor/jquery/jquery-1.9.1.min",
+	"jquery-ui": "vendor/jquery/jquery-ui.min",
     },
-    "shim": {
-	"underscore": {
-	    exports: '_'
+
+    shim: {
+	underscore: {
+	    exports: "_"
 	},
-	"backbone": {
+	backbone: {
 	    deps: ["underscore", "jquery"],
 	    exports: "Backbone"
 	},
-	"marionette": {
-	    deps: ["backbone"],
+	marionette: {
+	    deps:["backbone"],
 	    exports: "Marionette"
 	},
-    }
+    },
 });
 
-require(["marionette"], function(Marionette) {
-    window.app = new Marionette.Application();
 
-    app.addRegions({
-	header: "#header-region",
-	footer: "#footer-region",
-	body: "#body-region"
-    });
-
-    require(["app"], function () {
-	app.start();
-    });
-
+require(["app"], function(app) {
+    app.start()
 });
-
-    
-    
